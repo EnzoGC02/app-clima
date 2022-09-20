@@ -1,0 +1,12 @@
+.forecast__card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .forecast__day{
+    margin-bottom: 0.2em;
+  }
+  .forecast__temperature{
+    margin-top: 0.2em;
+  }

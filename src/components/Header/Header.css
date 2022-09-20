@@ -1,0 +1,18 @@
+.header{
+    background: var(--container-color);
+    min-height: 100px;
+    position: relative;
+}
+.header__nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__subnav{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background:var(--container-color-ligth);
+    padding: 15px;
+}

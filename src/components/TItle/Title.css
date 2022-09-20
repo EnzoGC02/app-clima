@@ -1,0 +1,7 @@
+.title__container{
+    margin-top: 1.5em;
+}
+.title{
+    color: var(--main-color);
+    font-family: var(--poppins)
+}
