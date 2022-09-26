@@ -1,29 +1,41 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useReducer} from 'react';
 import {API_BASE_URL, API_KEY} from '../../../config';
 
 import {useGeolocationApi} from '../../../__hooks/useGeolocationApi';
 
 import moment from 'moment';
 
+import {initialState, actionTypes, reducer} from '../reducer';
 
 const useClima=()=>{
   const {currentCoords, setCurrentCoords} = useGeolocationApi();
-  const [climaActual, setClimaActual] = useState(null);
-  const [pronostico, setPronostico] = useState(null);
-  const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [state, dispatch]= useReducer(reducer, initialState);
+  const {
+    climaActual,
+    pronostico,
+    isLoading,
+    error,
+  } =state;
+
+  // Creadores de acciones
+  const onSuccess= (clima, pronostico) =>
+    dispatch({type: actionTypes.success,
+      payload: {climaActual: clima, pronostico: pronostico}},
+    );
+
+  const onError=(error) => dispatch({type: actionTypes.error, payload: error});
+  const onLoading=()=> dispatch({type: actionTypes.loading});
+
   useEffect(() =>{
     if (currentCoords) {
-      setIsLoading(true);
+      onLoading();
       Promise.all([getClima('weather'), getClima('forecast')])
           .then((values)=>{
-            setClimaActual(values[0]);
             const dataProcesada = getDataProcesada(values[1]);
-            setPronostico(dataProcesada);
-            setIsLoading(false);
+            onSuccess(values[0], dataProcesada);
           })
           .catch((reason)=>{
-            setError(error);
+            onError(reason);
             console.log(reason);
           });
     }
