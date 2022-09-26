@@ -19,14 +19,28 @@ function getKMforHour(metersForSecond) {
 
 /**
  * @param {Date} date
- * @return {String} fecha formateada la forma local de visualizacion
+ * @param {Object | undefined} ciudad
+ * @param {Boolean} isHour
+ * @return {String} fecha o hora formateada
  */
-function getDateFormated(date) {
-  const options = {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-  };
-  return date.toLocaleDateString(undefined, options);
+function getDateFormated(date, ciudad, isHour=false) {
+  const local= ciudad.lang || undefined;
+  const options= {};
+  if (isHour) {
+    options.hour= '2-digit';
+    options.minute= '2-digit';
+  } else {
+    options.weekday= 'long';
+    options.year= 'numeric';
+    options.month= 'long';
+    options.day= 'numeric';
+  }
+  if (ciudad) {
+    options.timeZone=ciudad.timezone;
+  }
+  return date.toLocaleString(local, options);
 }
+
 /**
  * @param {Date} date
  * @return {String} nombre del dia de date
@@ -46,17 +60,9 @@ function getDayStringDate(date) {
 
   return nombreDia;
 }
-/**
- * @param {Date} date
- * @return {String} hora actual en formato HH:mm
- */
-function getHourCurrent(date) {
-  return date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
-}
 export {
   getKMforHour,
   getMeterToKM,
   getDateFormated,
   getDayStringDate,
-  getHourCurrent,
 };

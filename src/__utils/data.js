@@ -1,6 +1,8 @@
 const ciudades = [
   {
     name: 'Munich',
+    timezone: 'Europe/Berlin',
+    lang: 'de-DE',
     pais: {
       name: 'Alemania',
       value: 'DE',
@@ -12,6 +14,8 @@ const ciudades = [
   },
   {
     name: 'Madrid',
+    timezone: 'Europe/Madrid',
+    lang: 'es-ES',
     pais: {
       name: 'España',
       value: 'ES',
@@ -23,6 +27,8 @@ const ciudades = [
   },
   {
     name: 'Nueva York',
+    timezone: 'America/New_York',
+    lang: 'en-US',
     pais: {
       name: 'Estados unidos',
       value: 'US',
@@ -34,6 +40,8 @@ const ciudades = [
   },
   {
     name: 'Paris',
+    timezone: 'Europe/Paris',
+    lang: 'fr-FR',
     pais: {
       name: 'Francia',
       value: 'FR',
@@ -45,6 +53,8 @@ const ciudades = [
   },
   {
     name: 'Buenos Aires',
+    timezone: 'America/Argentina/Buenos_Aires',
+    lang: 'es-AR',
     pais: {
       name: 'Argentina',
       value: 'AR',

@@ -1,5 +1,5 @@
 import React from 'react';
-import {getDateFormated, getHourCurrent} from '../../__utils/functions';
+import {} from '../../__utils/functions';
 import icons from '../Iconos';
 import './ClimaInfo.css';
 
@@ -8,9 +8,9 @@ const ClimaInfo= (props)=>{
     <section className="weather">
       <div className="weather__container">
         <h2 className="weather__day">
-          {getDateFormated(new Date())}
+          {props.fecha}
         </h2>
-        <p className="weather__hours">{getHourCurrent(new Date())}</p>
+        <p className="weather__hours">{props.hora}</p>
         <div className="icon">
           <img
             alt="icon weather"

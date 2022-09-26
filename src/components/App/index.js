@@ -20,6 +20,7 @@ import useClima from './hooks/useClima';
 
 // utils
 import {ciudades} from '../../__utils/data';
+import {getDateFormated} from '../../__utils/functions';
 
 const App = () => {
   const {error, isLoading, climaActual, pronostico, handleSetCurrentCoords} =
@@ -28,6 +29,18 @@ const App = () => {
   const handleChangeSelect = (e) => {
     const ciudad = ciudades.find((c) => c.pais.value === e.target.value);
     handleSetCurrentCoords(ciudad.coordenadas);
+  };
+
+  const fechaActual=() =>{
+    const {sys} = climaActual;
+    const ciudad= ciudades.find((c) => c.pais.value === sys.country);
+    const date= new Date();
+    const fecha=getDateFormated(date, ciudad);
+    const hora= getDateFormated(date, ciudad, true);
+    return {
+      fecha,
+      hora,
+    };
   };
   return (
     <>
@@ -59,7 +72,7 @@ const App = () => {
         >
           {
             <>
-              <ClimaInfo climaActual={climaActual}/>
+              <ClimaInfo climaActual={climaActual} {...fechaActual()}/>
               <ClimaDetalles climaActual={climaActual}/>
             </>
           }
